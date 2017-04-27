@@ -1,0 +1,6 @@
+{
+  "name": "BibleScript",
+  "dependencies": {
+    "requirejs": "~2.2.0"
+  }
+}

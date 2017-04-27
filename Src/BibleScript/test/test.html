@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test Container - BibleScript</title>
+    </head>
+    <body>
+        <h1>BibleScript Test Container</h1>
+        <a href="../index.html">[Home]</a>
+        <br />
+        <hr />
+        <br />
+        <button id="runnerActionButton" onclick="executeTests();">Run Tests</button>
+        <br />
+        <br />
+        <div id="resultsContainer"></div>
+        <script type="text/javascript">
+
+            let testRunner = null;
+
+            function executeTests()
+            {
+                clearResults();
+                console.clear();
+
+                if (testRunner != null)
+                {
+                    try
+                    {
+                        testRunner.execute();
+
+                        showResult('The Test Suite passed.');
+                    }
+                    catch (ex)
+                    {
+                        showResult('The Test Suite failed!');
+                    }
+                }
+                else
+                {
+                    showResult('Test Runner not initialized.');
+                }
+            }
+
+            function clearResults()
+            {
+                showResult('');
+            }
+
+            function showResult(htmldata)
+            {
+                let div = document.getElementById('resultsContainer');
+
+                div.innerHTML = htmldata;
+            }
+
+        </script>
+        <script data-main="../scripts/main" src="../lib/requirejs/require.js"></script>
+    </body>
+</html>

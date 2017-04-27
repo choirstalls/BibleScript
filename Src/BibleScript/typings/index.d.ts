@@ -1,0 +1,5 @@
+﻿
+declare namespace BibleScript
+{
+
+}

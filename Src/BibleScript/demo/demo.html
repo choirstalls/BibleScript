@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo - BibleScript</title>
+    </head>
+    <body>
+        <h1>BibleScript Demo</h1>
+        <a href="../index.html">[Home]</a>
+        <br />
+        <hr />
+        <br />
+        <input id="contentDataTextInput" type="text" value="John 3:16" />
+        <br />
+        <br />
+        <button id="referenceActionButton" onclick="getReference();">Get Reference</button>
+        <button id="rangeActionButtonreferenceActionButton" onclick="getRange();">Get Range</button>
+        <br />
+        <br />
+        <div id="resultsContainer"></div>
+        <script type="text/javascript">
+
+            let testRunner = null;
+
+            function getReference()
+            {
+                let bibleScriptImport = testRunner.systemUnderTest;
+                let content = this.getContent();
+
+                let reference = bibleScriptImport.Bible.getReference(content);
+
+                this.showResult(reference.toString());
+            }
+
+            function getRange()
+            {
+                let bibleScriptImport = testRunner.systemUnderTest;
+                let content = this.getContent();
+
+                let range = bibleScriptImport.Bible.getRange(content);
+
+                this.showResult(range.toString());
+            }
+
+            function getContent()
+            {
+                let content = "";
+            
+                let contentDataTextInput = document.getElementById('contentDataTextInput');
+                content = contentDataTextInput.value;
+
+                return content;
+            }
+
+            function clearResults()
+            {
+                showResult('');
+            }
+
+            function showResult(htmldata)
+            {
+                let div = document.getElementById('resultsContainer');
+
+                div.innerHTML = htmldata;
+            }
+
+        </script>
+        <script data-main="../scripts/main" src="../lib/requirejs/require.js"></script>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+﻿{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"target": "es5",
+		"module": "amd",
+    "outDir": "scripts/",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"pretty": true
+	},
+  "exclude": [
+    "dist",
+    "bin",
+    "obj",
+    "lib",
+    "media",
+    "scripts"
+  ]
+}
