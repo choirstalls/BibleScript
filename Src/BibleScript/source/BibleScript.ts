@@ -1,35 +1,79 @@
 ﻿
+/**
+ * Contains all BibleScript functionality.
+ */
 export namespace BibleScript
 {
 
+    /**
+     * Represents a reference to a location in scripture.
+     */
     export class Reference
     {
 
+        /**
+         * The field containing the number of the book.
+         */
         private bookField: number = null;
+
+        /**
+         * The field containing the name of the book.
+         */
         private bookNameField: string = null;
+
+        /**
+         * The field containing the number of the chapter.
+         */
         private chapterField: number = null;
+
+        /**
+         * The field containing the number of the verse.
+         */
         private verseField: number = null;
 
+        /**
+         * Gets the number of the book.
+         * @returns The number of the book.
+         */
         public get book(): number
         {
             return this.bookField;
         }
 
+        /**
+         * Gets the name of the book.
+         * @returns The name of the book.
+         */
         public get bookName(): string
         {
             return this.bookNameField;
         }
 
+        /**
+         * Gets the number of the chapter.
+         * @returns The number of the chapter.
+         */
         public get chapter(): number
         {
             return this.chapterField;
         }
 
+        /**
+         * Gets the number of the verse.
+         * @returns The number of the verse.
+         */
         public get verse(): number
         {
             return this.verseField;
         }
 
+        /**
+         * Initializes a new instance of the Reference class.
+         * @param {number} book The number of the book.
+         * @param {string} bookName The name of the book.
+         * @param {number} chapter? The (optional) number of the chapter.
+         * @param {number} verse? The (optional) number of the verse.
+         */
         constructor(book: number, bookName: string, chapter?: number, verse?: number)
         {
             if (book != null)
@@ -53,16 +97,28 @@ export namespace BibleScript
             }
         }
 
+        /**
+         * Gets a value indicating whether the reference points to a chapter.
+         * @returns TRUE, if the reference points to a chapter; otherwise FALSE.
+         */
         public isChapter(): boolean
         {
             return false;
         }
 
+        /**
+         * Gets a value indicating whether the reference points to a verse.
+         * @returns TRUE, if the reference points to a verse; otherwise FALSE.
+         */
         public isVerse(): boolean
         {
             return false;
         }
 
+        /**
+         * Gets the absolute chapter number.
+         * @returns The absolute chapter number.
+         */
         public toAbsoluteChapterNumber(): number
         {
             let result: number = null;
@@ -85,6 +141,10 @@ export namespace BibleScript
             return result;
         }
 
+        /**
+         * Gets the absolute verse number.
+         * @returns The absolute verse number.
+         */
         public toAbsoluteVerseNumber(): number
         {
             let result: number = null;
@@ -112,13 +172,59 @@ export namespace BibleScript
             return result;
         }
 
-        public areEqual(reference: Reference): boolean
+        /**
+         * Moves the reference to the start of the book.
+         */
+        public moveToStartOfBook(): void
+        {
+        }
+
+        /**
+         * Moves the reference to the end of the book.
+         */
+        public moveToEndOfBook(): void
+        {
+        }
+
+        /**
+         * Moves the reference to the start of the chapter.
+         */
+        public moveToStartOfChapter(): void
+        {
+        }
+
+        /**
+         * Moves the reference to the end of the chapter.
+         */
+        public moveToEndOfChapter(): void
+        {
+        }
+
+        /**
+         * Clones the reference.
+         * @returns A new reference instance, with the same state as the current reference.
+         */
+        public clone(): Reference
+        {
+            return null;
+        }
+
+        /**
+         * Determines whether the specified reference is equal to the current reference.
+         * @param {Reference} reference The reference to be compared with the current reference.
+         * @returns TRUE if the specified reference is equal to the current reference; otherwise, FALSE.
+         */
+        public equals(reference: Reference): boolean
         {
             return ((this.book == reference.book) &&
                 (this.chapter == reference.chapter) &&
                 (this.verse == reference.verse));
         }
-
+        
+        /**
+         * Returns a string that represents the current reference.
+         * @returns A string that represents the current reference.
+         */
         public toString(): string
         {
             let result: string = "";
@@ -140,9 +246,15 @@ export namespace BibleScript
             return result;
         }
 
+        /**
+         * Gets the scripture text content, of the reference.
+         * @param {ScriptureTextLoadSuccessful} successCallback The callback to be invoked if the text is retrieved successfully.
+         * @param {ScriptureTextLoadFailure} failureCallback The callback to be invoked if an error occurs while retrieving the text.
+         * @param {string} version? The (optional) version of the Bible, from which the text is to be retrieved. The default is the King James Version (KJV).
+         */
         public getText(successCallback: ScriptureTextLoadSuccessful,
             failureCallback: ScriptureTextLoadFailure,
-            version?: string): any
+            version?: string): void
         {
             let passage: string = this.toString();
 
@@ -211,6 +323,29 @@ export namespace BibleScript
             return relationship;
         }
 
+        /**
+         * Clones the range.
+         * @returns A new range instance, with the same state as the current range.
+         */
+        public clone(): Range
+        {
+            return null;
+        }
+
+        /**
+         * Determines whether the specified range is equal to the current range.
+         * @param {Range} range The range to be compared with the current range.
+         * @returns TRUE if the specified range is equal to the current range; otherwise, FALSE.
+         */
+        public equals(range: Range): boolean
+        {
+            return false;
+        }
+        
+        /**
+         * Returns a string that represents the current range.
+         * @returns A string that represents the current range.
+         */
         public toString(): string
         {
             let result: string = "";
@@ -230,7 +365,12 @@ export namespace BibleScript
 
             return distance;
         }
-
+        /**
+         * Gets the scripture text content, of the range.
+         * @param {ScriptureTextLoadSuccessful} successCallback The callback to be invoked if the text is retrieved successfully.
+         * @param {ScriptureTextLoadFailure} failureCallback The callback to be invoked if an error occurs while retrieving the text.
+         * @param {string} version? The (optional) version of the Bible, from which the text is to be retrieved. The default is the King James Version (KJV).
+         */
         public getText(successCallback: ScriptureTextLoadSuccessful,
             failureCallback: ScriptureTextLoadFailure,
             version?: string): any
@@ -484,7 +624,7 @@ export namespace BibleScript
             return range;
         }
 
-        public static getLatterReference(referenceSpec: string, formerReference: Reference): Reference
+        private static getLatterReference(referenceSpec: string, formerReference: Reference): Reference
         {
             let reference: Reference = null;
 
@@ -882,7 +1022,13 @@ export namespace BibleScript
     // call out to https://getbible.net/api
     class NetBibleApi
     {
-
+        /**
+         * Gets the text content of the given passage of scripture.
+         * @param {string} passage The pass to be retrieved.
+         * @param {ScriptureTextLoadSuccessful} successCallback The callback to be invoked if the text is retrieved successfully.
+         * @param {ScriptureTextLoadFailure} failureCallback The callback to be invoked if an error occurs while retrieving the text.
+         * @param {string} version? The (optional) version of the Bible, from which the text is to be retrieved. The default is the King James Version (KJV).
+         */
         public static getText(passage: string,
             successCallback: ScriptureTextLoadSuccessful,
             failureCallback: ScriptureTextLoadFailure,

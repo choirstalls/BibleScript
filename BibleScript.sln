@@ -5,6 +5,14 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibleScript", "Src\BibleScript\BibleScript.csproj", "{52236E7E-5E39-45EA-83D0-EFEE4C03247B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{E7DEF09F-3043-4CD8-89A9-68A1357DAEAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{08B2CA9A-10E2-4D91-A70C-81B948D163D2}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +26,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52236E7E-5E39-45EA-83D0-EFEE4C03247B} = {E7DEF09F-3043-4CD8-89A9-68A1357DAEAA}
 	EndGlobalSection
 EndGlobal
