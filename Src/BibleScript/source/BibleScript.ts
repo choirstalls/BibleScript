@@ -6,7 +6,7 @@ export namespace BibleScript
 {
 
     /**
-     * Represents a reference to a location in scripture.
+     * A reference to a location in scripture.
      */
     export class Reference
     {
@@ -263,22 +263,45 @@ export namespace BibleScript
 
     }
 
+    /**
+     * A range of references to locations in scripture.
+     */
     export class Range
     {
 
+        /**
+         * The field containing the start of the range.
+         */
         private startRef: Reference = null;
+
+        /**
+         * The field containing the end of the range.
+         */
         private endRef: Reference = null;
 
+        /**
+         * The start of the range.
+         * @returns A Reference, pointing to the start of the range.
+         */
         public get start(): Reference
         {
             return this.startRef;
         }
 
+        /**
+         * The end of the range.
+         * @returns A Reference, pointing to the end of the range.
+         */
         public get end(): Reference
         {
             return this.endRef;
         }
 
+        /**
+         * Initializes a new instance of the Range class.
+         * @param {Reference} start The start of the range.
+         * @param {Reference} end? The (optional) end of the range. If this is omitted, the start and the end will be the same.
+         */
         public constructor(start: Reference, end?: Reference)
         {
             this.startRef = start;
@@ -293,6 +316,11 @@ export namespace BibleScript
             }
         }
 
+        /**
+         * Finds the relationship between the specified range and the current range.
+         * @param {Range} target The range with which the current range is to be compared.
+         * @returns The Relationship between the given range and the current range.
+         */
         public findRelationship(target: Range): Relationship
         {
             let relationship: Relationship = Relationship.None;
@@ -358,6 +386,10 @@ export namespace BibleScript
             return result;
         }
 
+        /**
+         * Gets the distance between the start and the end of the range.
+         * @returns The Distance between the start and the end of the range.
+         */
         public getDistance(): Distance
         {
             let distance: Distance = null;
@@ -382,47 +414,111 @@ export namespace BibleScript
 
     }
 
+    /**
+     * The distance between 2 locations in scriptural texts.
+     */
     export class Distance
     {
 
+        /**
+         * The number of books.
+         * @returns A number representing the number of books.
+         */
         public get books(): number
         {
             return 0;
         }
 
+        /**
+         * The number of chapters.
+         * @returns A number representing the number of chapters.
+         */
         public get chapters(): number
         {
             return 0;
         }
 
+        /**
+         * The number of verses.
+         * @returns A number representing the number of verses.
+         */
         public get verses(): number
         {
             return 0;
         }
 
+        /**
+         * Initializes a new instance of the Distance class.
+         */
         private constructor()
         {
         }
 
     }
 
+    /**
+     * The category of book.
+     */
     export enum Category
     {
+
+        /**
+         * No category specified.
+         */
         None,
+
+        /**
+         * The Old Testament.
+         */
         OldTestament,
+
+        /**
+         * The New Testament.
+         */
         NewTestament
+
     }
 
+    /**
+     * The relationship between references.
+     */
     export enum Relationship
     {
+
+        /**
+         * No relationship.
+         */
         None,
+
+        /**
+         * The primary reference contains its counterpart - the secondary reference.
+         */
         Container,
+
+        /**
+         * An overlap exists between the references, with the primary reference starting before the secondary reference.
+         */
         OverlapUnderrun,
+
+        /**
+         * The primary reference is contained by its counterpart - the secondary reference.
+         */
         Contained,
+
+        /**
+         * An overlap exists between the references, with the primary reference ending after the secondary reference.
+         */
         OverlapOverrun,
+
+        /**
+         * The references are identical.
+         */
         Identical
     }
 
+    /**
+     * The repository of BibleScript data.
+     */
     class Repository
     {
 
